@@ -1,0 +1,63 @@
+INSTRUCCIONES PARA SUBIR EN ALMALINUX
+
+1) Copia o descomprime el contenido de este ZIP dentro de:
+   /var/www/html/
+
+   Deben quedar así:
+   /var/www/html/index.php
+   /var/www/html/login.html
+   /var/www/html/clases/
+   /var/www/html/modulos/
+   /var/www/html/vistas/
+   /var/www/html/reportes/
+
+2) La conexión ya quedó configurada en:
+   clases/conexion.php
+
+   Host: localhost
+   Base de datos: refaccionaria
+   Usuario: refa
+   Contraseña: vacía
+
+3) Importa la base de datos:
+   mysql -u root -p < /var/www/html/re.sql
+
+4) Si todavía no existe el usuario refa, entra a MariaDB/MySQL como root y ejecuta:
+   CREATE USER IF NOT EXISTS 'refa'@'localhost' IDENTIFIED BY '';
+   GRANT ALL PRIVILEGES ON refaccionaria.* TO 'refa'@'localhost';
+   FLUSH PRIVILEGES;
+
+5) Da permisos normales a Apache:
+   sudo chown -R apache:apache /var/www/html
+   sudo chmod -R 755 /var/www/html
+
+6) Reinicia Apache:
+   sudo systemctl restart httpd
+
+7) Abre en el navegador:
+   http://IP_DEL_SERVIDOR/
+
+Usuarios de prueba en la base de datos:
+   Usuario: edgar
+   Contraseña: 1234
+
+Cambios aplicados:
+- Conexión cambiada a usuario refa sin contraseña.
+- Rutas corregidas para funcionar desde /var/www/html/ sin depender de /refaccionaria.
+- Reportes PDF corregidos para usar rutas internas del proyecto.
+- SQL corregido: la tabla clientes ahora usa fecha_nac, igual que el código PHP.
+- Enlaces a index.html cambiados a index.php porque el archivo principal es PHP.
+
+
+SOLUCIÓN SI NO REGISTRA CLIENTES
+
+- En esta versión el campo Fecha de nacimiento ya quedó como obligatorio en el formulario.
+- También se corrigió el modelo de clientes para que funcione aunque tu tabla anterior tenga la columna fecha_cli en lugar de fecha_nac.
+- Si quieres corregir definitivamente la tabla de la BD, puedes ejecutar:
+
+   mysql -u root -p < /var/www/html/arreglar_tabla_clientes.sql
+
+- Si aparece error de permisos del usuario refa, entra a MariaDB como root y ejecuta:
+
+   GRANT ALL PRIVILEGES ON refaccionaria.* TO 'refa'@'localhost';
+   FLUSH PRIVILEGES;

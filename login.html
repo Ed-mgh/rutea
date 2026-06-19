@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <title>Acceder al sistema</title>
+    <style>
+    .password-container {
+  position: relative;
+}
+    .password-container input {
+      width: 100%;
+      padding-right: 30px; /* espacio para el icono */
+    }
+    .password-container i {
+  position: absolute;
+  right: 12px;      /* separa un poco del borde */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6c757d;   /* gris Bootstrap */
+}
+  </style>
+
+</head>
+<body class="text-bg-primary py-3 py-md-5" background-color="#1a685b">
+    <!-- Login 9 - Bootstrap Brain Component -->
+<section class="text-bg-primary py-3 py-md-5">
+<div class="container">
+    <div class="row gy-4 align-items-center">
+              <div class="col-12 col-md-6 col-xl-6">
+              <div class="d-flex justify-content-center text-bg-primary">
+              <div class="col-12 col-xl-9">
+                                  
+              <hr class="border-primary-subtle mb-4">
+              <h2 class="h1 mb-4">Abarrotes Veracruz</h2>
+              <p class="lead mb-5">Bienvenido a nuestra plataforma.</p>
+              </div>
+              </div>
+              </div>
+          <div class="col-12 col-md-6 col-xl-5">
+              <div class="card border-0 rounded-4">
+                        <div class="card-body p-3 p-md-4 p-xl-5">
+                            <div class="row">
+                            <div class="col-12">
+                            <div class="mb-4">
+                            <h3>Acceder</h3>
+                            <p>¿No tienes una cuenta? <a href="#!">Registrate</a></p>
+                            </div>
+                            </div>
+                            </div>
+                            <form action="modulos/controladorLogin.php" method="post">
+                            <div class="row gy-3 overflow-hidden">
+                            <div class="col-12">
+                            <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="usuario" id="usuario" placeholder="nombre de usuario" required>
+                            <label for="usuario" class="form-label">Usuario</label>
+                            </div>
+                            </div>
+                            <div class="col-12">
+                            <div class="form-floating mb-3 password-container">
+                                <input type="password" class="form-control" name="pass" id="pass" placeholder="Password" required>
+                                <label for="pass" class="form-label">Password</label>
+                                <i class="fa-solid fa-eye" id="togglePassword"></i>
+                            </div>
+                            </div>
+
+                                                      
+                            <div class="col-12">
+                            <div class="d-grid">
+                            <button class="btn btn-primary btn-lg" type="submit">Ingresa ahora</button>
+                            </div>
+                            </div>
+                            </div>
+                            </form>
+                              
+                            
+                        </div>
+              </div>
+          </div>
+    </div>
+</div>
+</section>
+ <script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const password = document.querySelector("#pass");
+
+    togglePassword.addEventListener("click", function () {
+      // alterna entre password y text
+      const type = password.getAttribute("type") === "password" ? "text" : "password";
+      password.setAttribute("type", type);
+
+      // alterna el icono
+      this.classList.toggle("fa-eye-slash");
+    });
+  </script>
+</body>
+</html>
